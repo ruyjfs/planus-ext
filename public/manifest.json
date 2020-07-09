@@ -1,12 +1,12 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
+  "manifest_version": 2,
+  "short_name": "Meu Ponto",
+  "name": "Planus - Meu ponto de controle",
+  "icons": {
+    "16": "favicon.ico",
+    "48": "logo192.png",
+    "128": "logo512.png"
+  },
     {
       "src": "logo192.png",
       "type": "image/png",
