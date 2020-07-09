@@ -1,25 +1,19 @@
 {
   "manifest_version": 2,
-  "short_name": "Meu Ponto",
-  "name": "Planus - Meu ponto de controle",
+  "short_name": "Planus",
+  "name": "Planus: Meu ponto de controle",
   "icons": {
-    "16": "favicon.ico",
-    "48": "logo192.png",
-    "128": "logo512.png"
+    "16": "logo-16.png",
+    "48": "logo-48.png",
+    "128": "logo-128.png"
   },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Planus"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": ["notifications", "storage", "alarms"],
+  "version": "0.4"
 }
