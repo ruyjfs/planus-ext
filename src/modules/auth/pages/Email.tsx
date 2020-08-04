@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 
-import { Fab, InputAdornment, Grid, Fade } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import { TextField, Fab, InputAdornment, Grid, Fade } from '@material-ui/core';
 import Mail from '@material-ui/icons/Mail';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 
 import { useSelector, useDispatch } from 'react-redux';
-
-import AppContainer from '../../shared/components/AppContainer';
 
 export default ({ history }: any) => {
   const dispatch = useDispatch();
@@ -33,49 +30,48 @@ export default ({ history }: any) => {
       return false;
     }
     dispatch({ type: 'AUTH_ADD_DATA', data: { email: form.email } });
-    return history.push(`/auth-password`);
+    return history.push(`/auth/password`);
   }
+
   return (
-    <Fade in={true}>
-      <form onSubmit={submit}>
-        <div className={classes.container}>
-          <Grid container direction="row" justify="center" alignItems="center">
-            <Grid item xs={3}>
-              <TextField
-                autoFocus
-                label="Escreva o seu email"
-                // className={classes.textField}
-                margin="normal"
-                value={form.email}
-                onChange={handleChange('email')}
-                variant="outlined"
-                fullWidth
-                type={'email'}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Icon style={{ color: '#FBC02D' }}>mail</Icon>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} style={{ textAlign: 'center' }}>
-              <Fab
-                variant="extended"
-                color="primary"
-                aria-label="add"
-                onClick={submit}
-                style={{ color: '#FFF' }}
-              >
-                Próximo
-                <Icon>arrow_forward</Icon>
-              </Fab>
-            </Grid>
+    <form onSubmit={submit}>
+      <div className={classes.container}>
+        <Grid container direction="row" justify="center" alignItems="center">
+          <Grid item sm={12} md={3}>
+            <TextField
+              autoFocus
+              label="Escreva o seu email"
+              // className={classes.textField}
+              margin="normal"
+              variant="outlined"
+              value={form.email}
+              onChange={handleChange('email')}
+              fullWidth
+              type={'email'}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Icon style={{ color: '#FBC02D' }}>mail</Icon>
+                  </InputAdornment>
+                ),
+              }}
+            />
           </Grid>
-        </div>
-      </form>
-    </Fade>
+          <Grid item xs={12} style={{ textAlign: 'center' }}>
+            <Fab
+              variant="extended"
+              color="primary"
+              aria-label="add"
+              onClick={submit}
+              style={{ color: '#FFF' }}
+            >
+              Próximo
+              <Icon>arrow_forward</Icon>
+            </Fab>
+          </Grid>
+        </Grid>
+      </div>
+    </form>
   );
 };
 

@@ -1,66 +1,100 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { Fab, InputAdornment, Grid, Fade } from '@material-ui/core';
-import TextField from '@material-ui/core/TextField';
+import {
+  TextField,
+  Fab,
+  InputAdornment,
+  Grid,
+  Fade,
+  IconButton,
+} from '@material-ui/core';
 import Mail from '@material-ui/icons/Mail';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import AppContainer from '../../shared/components/AppContainer';
+import Auth from '../../../services/firebase/Auth';
 
 export default ({ history }: any) => {
   const dispatch = useDispatch();
   const auth = useSelector((state: any) => state.auth.data);
   const classes = useStyles();
 
-  const [form, setForm] = useState({
-    email: '',
-  });
+  const [form, setForm] = useState({ password: '' });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (!auth.email) {
+      history.push(`/auth-email`);
+    }
+  }, []);
 
   const handleChange = (name: any) => (event: any) => {
     setForm({ ...form, [name]: event.target.value });
   };
 
+  const handleMouseDownPassword = (event: any) => {
+    event.preventDefault();
+  };
+
   async function submit(event: any) {
     event.preventDefault();
-    if (!form.email) {
+
+    console.log(auth.password, form.password);
+
+    if (auth.password !== form.password) {
       dispatch({
         type: 'LAYOUT_SNACKBAR_ADD',
-        snackbar: { open: true, message: 'Ops.. Falta escrever o seu email!' },
+        snackbar: { open: true, message: 'Confirmação de senha diferente!' },
       });
-      return false;
+      return history.push(`/auth/password`);
     }
-    dispatch({ type: 'AUTH_ADD_DATA', data: { email: form.email } });
-    return history.push(`/auth-password`);
+    return history.push(`/auth/phone`);
   }
   return (
     <Fade in={true}>
       <form onSubmit={submit}>
         <div className={classes.container}>
           <Grid container direction="row" justify="center" alignItems="center">
-            <Grid item xs={3}>
+            <Grid item sm={12} md={3}>
               <TextField
                 autoFocus
-                label="Escreva o seu email"
+                label="Confirme a sua senha"
                 // className={classes.textField}
                 margin="normal"
-                value={form.email}
-                onChange={handleChange('email')}
                 variant="outlined"
+                value={form.password}
+                onChange={handleChange('password')}
                 fullWidth
-                type={'email'}
+                type={showPassword ? 'text' : 'password'}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Icon style={{ color: '#FBC02D' }}>mail</Icon>
+                      <Icon style={{ color: '#FBC02D' }}>vpn_key</Icon>
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
                     </InputAdornment>
                   ),
                 }}
               />
             </Grid>
             <Grid item xs={12} style={{ textAlign: 'center' }}>
+              {/* <Fab variant="extended" color="primary" aria-label="add" onClick={submit} style={{ color: '#FFF', marginRight: '15px' }}>
+              <Icon>arrow_backward</Icon>
+              Voltar
+            </Fab> */}
               <Fab
                 variant="extended"
                 color="primary"

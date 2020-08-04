@@ -18,6 +18,7 @@ export default ({
     // red: '#ffc371, #FF7442, #ff5f6d, #FF1E1E',
     white: '#FFE6FF, #E6FFFF, #E6E6FF, #E6FFE6, #FFFFE6, #FFE7E7',
     beige: '#FDF5E7, #FDF5E7, #FEFDDE',
+    black: '#444343, #1a1a1b',
   };
 
   return (
@@ -36,7 +37,9 @@ export default ({
 };
 
 const Container = styled.div`
-  padding: 0 10px;
+  scroll-behavior: smooth;
+  min-height: 80vh;
+  /* padding: 0 10px; */
   min-width: 150px;
   /* min-height: 100vh; */
   display: flex;

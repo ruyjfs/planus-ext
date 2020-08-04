@@ -17,10 +17,12 @@ export default {
   },
   async login(email, password) {
     try {
+      console.log(email, password);
       await firebase.auth()
         .signInWithEmailAndPassword(email, password);
       return { status: true };
     } catch (error) {
+      console.log(error);
       return { status: false, error }
     }
   },

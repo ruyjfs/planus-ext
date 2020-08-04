@@ -1,20 +1,23 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { amber } from '@material-ui/core/colors';
-
-import { Provider } from 'react-redux';
-import store from './redux/store';
 
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 import Routes from './routes';
+import { store, persistor } from './redux';
 
 // import firebaseConfig from './configs/firebase';
 import { messaging } from './services/firebase/index';
+
+import AppLoading from './modules/shared/components/AppLoading';
 
 // firebaseConfig.init();
 
@@ -114,12 +117,12 @@ const App = () => {
           // await messaging.subscribe('users');
           // console.log('AEEE inscrico ao topico USERS');
           localStorage.setItem(
-            'auth',
+            'authFcm',
             JSON.stringify({
               tokenFcm: token,
             })
           );
-          console.log('TOKEN FCM', JSON.parse(localStorage.auth).tokenFcm);
+          console.log('TOKEN FCM', JSON.parse(localStorage.authFcm).tokenFcm);
 
           window.chrome.runtime?.sendMessage(
             'dkaagkdinghogdefbehebocjapbpdmdo',
@@ -173,9 +176,11 @@ const theme = createMuiTheme({
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
+    <PersistGate loading={<AppLoading />} persistor={persistor}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </PersistGate>
   </Provider>,
   // </React.StrictMode>
   document.getElementById('root')

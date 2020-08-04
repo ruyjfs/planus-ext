@@ -1,5 +1,13 @@
+// if ('undefined' === typeof window) {
 importScripts("https://www.gstatic.com/firebasejs/5.9.4/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/5.9.4/firebase-messaging.js");
+// }
+
+// if (!(evt.request.url.indexOf('http') === 0)) return;
+// if (!(event.request.url.indexOf('http') === 0)) {
+//   //skip request
+// }
+
 firebase.initializeApp({
   // Project Settings => Add Firebase to your web app
   // messagingSenderId: "1062407524656"

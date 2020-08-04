@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Snackbar, SnackbarContent, Slide, Icon } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,9 +12,20 @@ import CloseIcon from '@material-ui/icons/Close';
 import { amber, green } from '@material-ui/core/colors';
 import clsx from 'clsx';
 
-const transition = (props) => <Slide {...props} direction="up" />;
+interface Snackbar {
+  type: string;
+  open: boolean;
+  time: number;
+  message: string;
+}
 
-const variantIcon = {
+interface VariantIcon {
+  [state: string]: any;
+}
+
+const transition = (props: any) => <Slide {...props} direction="up" />;
+
+const variantIcon: VariantIcon = {
   success: CheckCircleIcon,
   warning: WarningIcon,
   error: ErrorIcon,
@@ -23,9 +34,9 @@ const variantIcon = {
 
 export default () => {
   const dispatch = useDispatch();
-  const snackbar = useSelector(state => state.layout.snackbar);
+  const snackbar = useSelector((state: any): Snackbar => state.layout.snackbar);
   const Icon = variantIcon[snackbar.type];
-  const classes = useStyles1();
+  const classes: any = useStyles1();
 
   const handleClose = () => {
     dispatch({ type: 'LAYOUT_SNACKBAR_ADD', snackbar: { open: false } });
@@ -40,7 +51,7 @@ export default () => {
 
   return (
     <Snackbar
-      variant={snackbar.type}
+      // variant={snackbar.type}
       open={snackbar.open}
       onClose={handleClose}
       TransitionComponent={transition}
@@ -53,18 +64,24 @@ export default () => {
           <span id="message-id" className={classes.message}>
             <Icon className={clsx(classes.icon, classes.iconVariant)} />
             {snackbar.message}
-          </span>}
+          </span>
+        }
         action={[
-          <IconButton key="close" aria-label="close" color="inherit" onClick={handleClose}>
+          <IconButton
+            key="close"
+            aria-label="close"
+            color="inherit"
+            onClick={handleClose}
+          >
             <CloseIcon className={classes.icon} />
           </IconButton>,
-        ]} />
+        ]}
+      />
     </Snackbar>
   );
-}
+};
 
-
-const useStyles1 = makeStyles(theme => ({
+const useStyles1 = makeStyles((theme) => ({
   success: {
     color: '#FFF',
     backgroundColor: green[600],
@@ -76,7 +93,9 @@ const useStyles1 = makeStyles(theme => ({
   info: {
     color: '#FFF',
     // backgroundColor: theme.palette.primary.main,
-    backgroundColor: '#FBC02D',
+    // backgroundColor: '#FBC02D',
+    backgroundColor: 'rgb(255, 99, 69)',
+    // backgroundColor: '#00000099',
   },
   warning: {
     color: '#FFF',

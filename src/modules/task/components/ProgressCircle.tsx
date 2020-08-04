@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Messaging from '../../../services/firebase/services/Messaging';
 
-export default ({ start, min }: any) => {
+export default ({ start, min, reset = false, onReset = () => {} }: any) => {
   const [secondsEllapsed, setSecondsEllapsed] = useState(0);
   const [dateTime, setDateTime] = useState(dayjs('01/05/2020 00:00:00'));
   const [currentDateTime, setCurrentDateTime] = useState(
@@ -26,10 +26,18 @@ export default ({ start, min }: any) => {
     onStartBrowser();
   }, [start]);
 
-  function onReset() {
+  useEffect(() => {
+    if (reset) {
+      onReset(false);
+      onReset1();
+    }
+  }, [reset]);
+
+  function onReset1() {
     clearInterval(timer.current);
     setSecondsEllapsed(0);
     setStarted(false);
+    onStopBrowser();
     // setTimeEnabled(false);
   }
 
@@ -55,12 +63,25 @@ export default ({ start, min }: any) => {
       });
     }
   }
+  function onStopBrowser() {
+    console.log(window.chrome.runtime.id);
+    if (window.chrome.runtime?.id) {
+      window.chrome.runtime?.sendMessage(window.chrome.runtime.id, {
+        type: 'STOP',
+        payload: {
+          status: start,
+          minLimit: min,
+        },
+      });
+    }
+  }
 
   useEffect(() => {
     // if (localStorage?.timer) {
-    let localStorageData = JSON.parse(localStorage?.timer);
-    console.log(localStorageData);
-    if (localStorageData) {
+    if (localStorage?.timer) {
+      let localStorageData = JSON.parse(localStorage?.timer);
+      console.log(localStorageData);
+
       setCurrentDateTime(dayjs(localStorageData?.currentDateTime));
       setSecondsEllapsed(parseInt(localStorageData?.secondsEllapsed));
       setStarted(localStorageData?.started);
@@ -188,4 +209,5 @@ export default ({ start, min }: any) => {
 
 const Container = styled.div`
   max-width: 150px;
+  margin: 0 10px;
 `;

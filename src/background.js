@@ -1,5 +1,135 @@
 import dayjs from 'dayjs';
 import Messaging from './services/firebase/services/Messaging'
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/messaging';
+import 'firebase/database';
+
+// this file will run once on extension load
+const firebaseConfig = {
+    apiKey: 'AIzaSyB45oXJyBISbQKQJTCeE5z-qlgPYAW2yoc',
+    authDomain: 'planus-app.firebaseapp.com',
+    databaseURL: 'https://planus-app.firebaseio.com',
+    projectId: 'planus-app',
+    storageBucket: 'planus-app.appspot.com',
+    messagingSenderId: '1050322315193',
+    appId: '1:1050322315193:web:bd5cfe804a3eb473ecb868',
+    measurementId: 'G-MFYNY9RH16',
+};
+// const app = firebase.initializeApp(firebaseConfig);
+// const appDb = app.database().ref();
+
+firebase.initializeApp(firebaseConfig);
+
+const messaging = firebase.messaging();
+const firestore = firebase.firestore();
+
+enableMessaging();
+
+function enableMessaging() {
+    try {
+        messaging
+            .requestPermission()
+            .then(async () => {
+                const token = await messaging.getToken();
+                // await messaging.subscribe('users');
+                // console.log('AEEE inscrico ao topico USERS');
+                localStorage.setItem(
+                    'authFcm',
+                    JSON.stringify({
+                        tokenFcm: token,
+                    })
+                );
+                console.log('TOKEN FCM', JSON.parse(localStorage.authFcm).tokenFcm);
+
+                window.chrome.runtime.sendMessage(
+                    window.chrome.runtime.id,
+                    {
+                        type: 'debug',
+                        value: { tokenFcm: token, localStorage },
+                    }
+                );
+                window.chrome.runtime.sendMessage(
+                    window.chrome.runtime.id,
+                    {
+                        type: 'tokenUpdate',
+                        payload: { tokenFcm: token },
+                    }
+                );
+            })
+            .catch(function (err) {
+                console.log('Unable to get permission to notify.', err);
+            });
+
+        messaging.onMessage((payload) => {
+            console.log('Message received. ', payload);
+            // ...
+        });
+    } catch (e) {
+        console.log(e, 'Aqui');
+    }
+}
+
+
+
+// // instantiate global application state object for Chrome Storage and feed in firebase data
+// // Chrome Storage will store our global state as a a JSON stringified value.
+// const applicationState = { values: [] };
+// appDb.on('child_added', snapshot => {
+//     applicationState.values.push({
+//         id: snapshot.key,
+//         value: snapshot.val()
+//     });
+//     updateState(applicationState);
+// });
+
+// appDb.on('child_removed', snapshot => {
+//     const childPosition = getChildIndex(applicationState, snapshot.key)
+//     if (childPosition === -1) return
+//     applicationState.values.splice(childPosition, 1);
+//     updateState(applicationState);
+// });
+
+// appDb.on('child_changed', snapshot => {
+//     const childPosition = getChildIndex(applicationState, snapshot.key)
+//     if (childPosition === -1) return
+//     applicationState.values[childPosition] = snapshot.val();
+//     updateState(applicationState);
+// });
+
+// // updateState is a function that writes the changes to Chrome Storage
+// function updateState(applicationState) {
+//     chrome.storage.local.set({ state: JSON.stringify(applicationState) });
+// }
+
+// // getChildIndex will return the matching element in the object
+// function getChildIndex(appState, id) {
+//     return appState.values.findIndex(element => element.id == id)
+// }
+
+// // if your Chrome Extension requires any content scripts that will manipulate data,
+// // add a message listener here to access appDb:
+
+// chrome.runtime.onMessage.addListener((msg, sender, response) => {
+//     switch (msg.type) {
+//         case 'updateValue':
+//             appDb.child(msg.opts.id).set({ value: msg.opts.value });
+//             response('success');
+//             break;
+//         default:
+//             response('unknown request');
+//             break;
+//     }
+// });
+//That’s it! All your extension needs to do is load from the Chrome local storage before rendering itself. If it or a content script needs to manipulate the RTD, the following snippet should be invoked:
+
+// chrome.runtime.sendMessage({ type: 'updateValue', opts: request.opts }, (response) => {
+//     if (response == 'success') {
+//         // implement success action here
+//     }
+// });
+// FIM FIREBASE;
 
 console.log(window.chrome.runtime.id, 'ÍD');
 
@@ -37,7 +167,7 @@ let tokenFcm = '';
 function onStart(params) {
     // const tokenFcm = localStorage.auth;
     // const tokenFcm = JSON.parse(localStorage.auth).tokenFcm;
-    console.log(tokenFcm, 'tokenFcm')
+    const tokenFcm = JSON.parse(localStorage.authFcm).tokenFcm;
     current = setInterval(() => {
         secondsEllapsed = secondsEllapsed + 1;
         currentDateTime = dateTime.add(secondsEllapsed, 'second');
@@ -75,9 +205,10 @@ function onStart(params) {
 }
 
 function onReset() {
-    clearInterval(timer.current);
-    currentDateTime = dayjs('01/05/2020 00:00:00');
+    console.log('RESET <<-------')
+    clearInterval(current);
     secondsEllapsed = 0;
+    currentDateTime = dayjs('01/05/2020 00:00:00');
     localStorage.setItem('timer', JSON.stringify({
         started: false,
         currentDateTime: currentDateTime,
@@ -98,6 +229,10 @@ window.chrome.runtime.onMessage.addListener(
     (message, sender, sendResponse) => {
         if (message.type === 'START') {
             onStartBrowser(message.payload)
+        }
+        if (message.type === 'STOP') {
+            onStop();
+            onReset()
         }
         if (message.type === 'tokenUpdate') {
             console.log(message, 'tokenUpdate');

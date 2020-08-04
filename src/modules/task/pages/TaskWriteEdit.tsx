@@ -4,10 +4,9 @@ import { useHistory } from 'react-router-dom';
 
 import AppSaveRouter from '../../shared/containers/AppSaveRouter';
 import AppContainer from '../../shared/components/AppContainer';
-import AppNavigationBotton from '../../shared/components/AppNavigationBotton';
+// import AppNavigationBotton from '../../shared/components/AppNavigationBotton';
 
-import TaskList from '../containers/TaskList';
-import AppNavigationTop from '../../shared/components/AppNavigationTop';
+import TaskForm from '../containers/TaskForm';
 
 export default () => {
   const dispatch = useDispatch();
@@ -29,11 +28,8 @@ export default () => {
 
   return (
     <AppContainer color="orange" alignHorizontal="center">
-      <>
-        <AppSaveRouter routerLink="/tasks" />
-        <TaskList />
-        <AppNavigationBotton value="home" />
-      </>
+      <AppSaveRouter routerLink="/task-write-edit" />
+      <TaskForm />
     </AppContainer>
   );
 };

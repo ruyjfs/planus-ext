@@ -2,21 +2,22 @@ import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { blue, orange, } from "@material-ui/core/colors";
-import { Fade } from "@material-ui/core";
+import { blue, orange } from '@material-ui/core/colors';
+import { Fade } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import Icon from '@material-ui/core/Icon';
 
 import AppSnackbar from '../app/AppSnackbar';
+import AppContainer from '../../modules/shared/components/AppContainer';
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 // import Auth from '../../services/firebase/Auth';
 
 const drawerWidth = 240;
 
-export default ({ history, children }) => {
+export default ({ history, children }: any) => {
   // const auth = useSelector(state => state.auth.data);
 
   // useEffect(() => {
@@ -51,8 +52,8 @@ export default ({ history, children }) => {
     setOpen(false);
   }
 
-  function redirect(url) {
-    history.push(`${url}`)
+  function redirect(url: string) {
+    history.push(`${url}`);
   }
 
   const theme = createMuiTheme({
@@ -61,7 +62,7 @@ export default ({ history, children }) => {
       primary: {
         main: '#FBC02D',
       },
-      secondary: blue
+      secondary: blue,
       // {
       //   // light: pink,
       //   // main: palette.primary[500],
@@ -83,29 +84,23 @@ export default ({ history, children }) => {
     },
   });
 
-
   return (
     <ThemeProvider theme={theme}>
-      <Fade in={true}>
-        <div className={classes.root} >
-          <main
-            className={classes.content}
-          >
-            {children}
-          </main>
+      <AppContainer color="black">
+        <div className={classes.root}>
+          <main className={classes.content}>{children}</main>
           <AppSnackbar />
-        </div >
-      </Fade>
+        </div>
+      </AppContainer>
     </ThemeProvider>
   );
-}
-
+};
 
 const AppSpace = styled.div`
   flex-grow: 1;
 `;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
@@ -146,7 +141,7 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     minHeight: '100vh',
-    padding: theme.spacing(3),
+    // padding: theme.spacing(3),
   },
   contentShift: {
     transition: theme.transitions.create('margin', {

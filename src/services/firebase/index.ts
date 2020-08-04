@@ -1,7 +1,8 @@
 import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/messaging';
-import 'firebase/';
+import 'firebase/database';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyB45oXJyBISbQKQJTCeE5z-qlgPYAW2yoc',
@@ -16,9 +17,12 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+const messaging = firebase.messaging();
+const firestore = firebase.firestore();
+// firestore.settings({ timestampsInSnapshots: true });
+
 export default firebase;
-export const messaging = firebase.messaging();
-export const firestore = firebase.firestore();
+export { firestore, messaging };
 
 messaging.onMessage((params) => {
   console.log(params);
