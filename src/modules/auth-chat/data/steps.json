@@ -1,0 +1,83 @@
+{
+  "hi": {
+    "id": "hi",
+    "text": ["Olá! 😃", "Oi... 😊", "Hey... 👋🏼"],
+    "nextId": "pleasing"
+  },
+  "pleasing": {
+    "id": "pleasing",
+    "text": [
+      "Espero que esteja bem!",
+      "Fico muito feliz em te ver por aqui!",
+      "Que bom te ver por aqui!"
+    ],
+    "nextId": "email"
+  },
+  "email": {
+    "id": "email",
+    "text": "Qual o seu melhor email?",
+    "input": {
+      "name": "email",
+      "type": "email",
+      "placeholder": "Digite o seu melhor email..."
+    },
+    "reply": ["Legal, bom te ver de volta!"],
+    "onSubmitName": "onSubmitEmail",
+    "nextId": "name"
+  },
+  "name": {
+    "id": "name",
+    "text": [
+      "Como você gosta de ser chamado(a)?",
+      "Qual o seu nome?",
+      "Como te chamam?"
+    ],
+    "input": {
+      "name": "name",
+      "type": "text",
+      "placeholder": "Digite aqui..."
+    },
+    "reply": [
+      "Gostei ::value::",
+      "Bonito nome ::value::",
+      "Lindo nome ::value::"
+    ],
+    "nextId": "password"
+  },
+  "password": {
+    "id": "password",
+    "text": "Qual a sua senha?",
+    "input": {
+      "name": "password",
+      "type": "password",
+      "placeholder": "Digite a sua senha..."
+    },
+    "reply": ["Legal...", "Top!", "Uhul..."],
+    "onSubmitName": "onSubmitPassword",
+    "nextId": "how"
+  },
+  "how": {
+    "id": "how",
+    "text": ["Por onde me conheceu?", "Onde me encontrou?"],
+    "input": {
+      "name": "how",
+      "type": "select",
+      "placeholder": "Digite aqui...",
+      "options": [
+        { "id": 1, "text": "Indicação de alguém" },
+        { "id": 2, "text": "Propaganda" },
+        { "id": 3, "text": "Loja de aplicativo" },
+        { "id": 10, "text": "Outros" }
+      ]
+    },
+    "reply": [
+      "Que da hora!",
+      "Que de mais!",
+      "Muito top!",
+      "Da hora!",
+      "Top!",
+      "Uhul..."
+    ],
+    "onSubmitName": "onSubmitEnd"
+  }
+}

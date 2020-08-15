@@ -1,4 +1,4 @@
-import { call, put, takeEvery, select, fork, take } from 'redux-saga/effects';
+import { call, put, takeEvery, select } from 'redux-saga/effects';
 
 import Service from '../../services/firebase/Focus';
 import TypesReducers from '../reducers/types';

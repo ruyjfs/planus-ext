@@ -118,13 +118,13 @@ const Info = styled.div`
   align-items: center;
 `;
 
-const Divider = styled.div`
-  flex: 1;
-  width: 100%;
-  margin: 5px 0;
-  border-width: 0.5px;
-  border-color: #ffffff30;
-`;
+// const Divider = styled.div`
+//   flex: 1;
+//   width: 100%;
+//   margin: 5px 0;
+//   border-width: 0.5px;
+//   border-color: #ffffff30;
+// `;
 
 const Actions = styled.div`
   display: flex;
@@ -141,11 +141,11 @@ const Action = styled(TouchOpacity)`
   justify-content: center;
 `;
 
-const ActionText = styled.div`
-  color: #fff;
-  margin-right: 10px;
-  font-size: 14px;
-`;
+// const ActionText = styled.div`
+//   color: #fff;
+//   margin-right: 10px;
+//   font-size: 14px;
+// `;
 
 const Text = styled.div`
   margin: 5px;

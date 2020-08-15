@@ -19,11 +19,16 @@ enum AppTypes {
   CHECKPOINT_ADD = 'app/CHECKPOINT_ADD',
   SETTINGS_ADD = 'app/SETTINGS_ADD',
 }
+enum AuthTypes {
+  ADD = 'auth/ADD',
+  REFRESH = 'auth/REFRESH',
+}
 
 const Types = {
+  AUTH: AuthTypes,
+  APP: AppTypes,
   TASKS: TasksTypes,
   FOCUS: FocusTypes,
-  APP: AppTypes,
 };
 
 export default Types;

@@ -8,7 +8,7 @@ import {
   Fade,
   IconButton,
 } from '@material-ui/core';
-import Mail from '@material-ui/icons/Mail';
+// import Mail from '@material-ui/icons/Mail';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Visibility from '@material-ui/icons/Visibility';
@@ -16,11 +16,11 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import Auth from '../../../services/firebase/Auth';
+// import Auth from '../../../services/firebase/Auth';
 
 export default ({ history }: any) => {
   const dispatch = useDispatch();
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
   const classes = useStyles();
 
   const [form, setForm] = useState({ password: '' });
@@ -28,7 +28,7 @@ export default ({ history }: any) => {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (!auth.email) {
+    if (!auth.email && history) {
       history.push(`/auth-email`);
     }
   }, []);
@@ -37,9 +37,9 @@ export default ({ history }: any) => {
     setForm({ ...form, [name]: event.target.value });
   };
 
-  const handleMouseDownPassword = (event: any) => {
-    event.preventDefault();
-  };
+  // const handleMouseDownPassword = (event: any) => {
+  //   event.preventDefault();
+  // };
 
   async function submit(event: any) {
     event.preventDefault();

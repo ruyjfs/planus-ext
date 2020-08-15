@@ -11,7 +11,7 @@ import TaskForm from '../containers/TaskForm';
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
 
   React.useEffect(() => {
     if (!auth.uid) {

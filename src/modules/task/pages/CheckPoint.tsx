@@ -15,7 +15,7 @@ export default () => {
   }, []);
   return (
     <>
-      <AppNavigationTop right={{ icon: 'settings', link: '/config' }} />
+      <AppNavigationTop right={{ icon: 'settings', link: '/settings' }} />
       <Container>
         <AppSaveRouter routerLink="/checkpoint" />
         <AppLogo />

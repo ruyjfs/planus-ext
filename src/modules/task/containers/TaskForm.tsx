@@ -14,7 +14,7 @@ export default () => {
   let { id } = useParams();
   let history = useHistory();
 
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
   const data = useSelector((state: any) => (id ? state.tasks.byId[id] : {}));
   const dispatch = useDispatch();
   // const id = route.params.id;
@@ -131,6 +131,7 @@ const ContainerTop = styled.div`
   width: 100%;
 `;
 const Container = styled.div`
+  min-width: 300px;
   width: 100%;
   /* height: 100vh; */
   justify-content: start;

@@ -10,7 +10,8 @@ export default class Messaging {
         to: tokenFcm,
         data: {
           title: title,
-          body: message
+          body: message,
+          sound: "default"
         },
         notification: {
           title: title,

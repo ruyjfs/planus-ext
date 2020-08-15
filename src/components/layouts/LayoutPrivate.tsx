@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
-import Auth from '../../services/firebase/Auth';
+// import { useSelector } from 'react-redux';
+// import Auth from '../../services/firebase/Auth';
 
 import AppSnackbar from '../app/AppSnackbar';
 import AppContainer from '../../modules/shared/components/AppContainer';
-import AppNavigationTop from '../../modules/shared/components/AppNavigationTop';
+// import AppNavigationTop from '../../modules/shared/components/AppNavigationTop';
 import AppNavigationBotton from '../../modules/shared/components/AppNavigationBotton';
 
 export default ({ history, children }: any) => {
-  const auth = useSelector((state: any) => state.auth.data);
+  // const auth = useSelector((state: any) => state.auth);
 
   // useEffect(() => {
   //   async function verifyAuth() {

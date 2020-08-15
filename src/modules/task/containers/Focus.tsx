@@ -11,7 +11,7 @@ import Types from '../../../redux/sagas/types';
 import ProgressCircle from '../components/ProgressCircle';
 
 export default () => {
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
   const byId = useSelector((state: any) => state.focus.byId);
   const settings = useSelector((state: any) => state.app.settings);
   let { id } = useParams();

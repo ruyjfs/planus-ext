@@ -1,4 +1,4 @@
-import { call, put, takeEvery, select, fork, take } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 import Service from '../../services/firebase/Tasks';
 // import ServiceComments from '~/services/firebase/Comments';
@@ -54,6 +54,7 @@ function* load({ payload }: any) {
       { userId: payload.userId },
       payload.page
     );
+    console.log(byId, '<<--', payload.userId);
     // const byId = yield call(promiseApi);
     yield put({
       type: TypesReducers.TASKS.ADD,

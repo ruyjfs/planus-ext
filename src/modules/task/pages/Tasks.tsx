@@ -7,12 +7,12 @@ import AppContainer from '../../shared/components/AppContainer';
 import AppNavigationBotton from '../../shared/components/AppNavigationBotton';
 
 import TaskList from '../containers/TaskList';
-import AppNavigationTop from '../../shared/components/AppNavigationTop';
+// import AppNavigationTop from '../../shared/components/AppNavigationTop';
 
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
 
   React.useEffect(() => {
     if (!auth.uid) {

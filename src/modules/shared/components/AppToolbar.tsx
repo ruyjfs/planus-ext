@@ -9,11 +9,11 @@ import {
   LinkProps as RouterLinkProps,
 } from 'react-router-dom';
 
-const LinkBehavior = React.forwardRef<any, Omit<RouterLinkProps, 'to'>>(
-  (props, ref) => (
-    <RouterLink ref={ref} to="/getting-started/installation/" {...props} />
-  )
-);
+// const LinkBehavior = React.forwardRef<any, Omit<RouterLinkProps, 'to'>>(
+//   (props, ref) => (
+//     <RouterLink ref={ref} to="/getting-started/installation/" {...props} />
+//   )
+// );
 
 export default ({ buttonLeft = { to: '/', icon: 'arrow_back' } }: any) => {
   const classes = useStyles();

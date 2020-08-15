@@ -17,7 +17,7 @@ import { persistor } from '../../../redux/index';
 
 export default () => {
   let history = useHistory();
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
   const app = useSelector((state: any) => state.app);
   const byId = useSelector((state: any) => state.tasks.byId);
   const list = useSelector((state: any) => state.tasks.allId);
@@ -98,6 +98,7 @@ export default () => {
 
 const ContainerList = styled.div``;
 const Container = styled.div`
+  min-width: 300px;
   width: 100%;
   /* display: flex;
   flex-direction: column;

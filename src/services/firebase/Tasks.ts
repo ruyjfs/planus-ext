@@ -6,6 +6,7 @@ import ormBase from './Orm';
 const model = firestore.collection('tasks'),
   interfaceModel = {
     text: '',
+    done: false,
     userId: '',
     dayWeek: '',
     createdAt: '',

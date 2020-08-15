@@ -131,7 +131,39 @@ function enableMessaging() {
 // });
 // FIM FIREBASE;
 
-console.log(window.chrome.runtime.id, 'ÍD');
+const onStart2 = async () => {
+    console.log(window.chrome.runtime.id, 'ÍD', Date.now() + 1);
+}
+onStart2();
+
+chrome.alarms.create('Pomodoro', { delayInMinutes: 0.1, periodInMinutes: 0.5 });
+
+const showNotification = () => {
+
+
+    const tokenFcm = JSON.parse(localStorage.authFcm).tokenFcm;
+    if (tokenFcm) {
+        const m = new Messaging();
+        m.send({
+            tokenFcm: tokenFcm,
+            title: 'Uhul! \\o/', message: `Fim do expediente!`
+        })
+        var myAudio = new Audio(chrome.runtime.getURL("message-msn.mp3"));
+        myAudio.play();
+    }
+    // chrome.notifications.create('reminder', {
+    //     type: 'basic',
+    //     title: 'Don\'t forget!',
+    //     message: 'You have things to do. Wake up, dude!'
+    // }, function (notificationId) { });
+}
+
+chrome.alarms.onAlarm.addListener(function (alarm) {
+    console.log("Got an alarm!", alarm);
+    // Now create the notification
+    showNotification();
+    chrome.alarms.clear(alarm.name);
+});
 
 // create alarm for watchdog and fresh on installed/updated, and start fetch data
 chrome.runtime.onInstalled.addListener(function (details) {
@@ -255,24 +287,24 @@ window.chrome.runtime.onMessage.addListener(
 );
 
 // alarm listener
-window.chrome.alarms.onAlarm.addListener(alarm => {
-    // if watchdog is triggered, check whether refresh alarm is there
-    if (alarm && alarm.name === 'watchdog') {
-        chrome.alarms.get('refresh', alarm => {
-            if (alarm) {
-                console.log('Refresh alarm exists. Yay.');
-            } else {
-                // if it is not there, start a new request and reschedule refresh alarm
-                console.log("Refresh alarm doesn't exist, starting a new one");
-                // startRequest();
-                // scheduleRequest();
-            }
-        });
-    } else {
-        // if refresh alarm triggered, start a new request
-        startRequest();
-    }
-});
+// window.chrome.alarms.onAlarm.addListener(alarm => {
+//     // if watchdog is triggered, check whether refresh alarm is there
+//     if (alarm && alarm.name === 'watchdog') {
+//         chrome.alarms.get('refresh', alarm => {
+//             if (alarm) {
+//                 console.log('Refresh alarm exists. Yay.');
+//             } else {
+//                 // if it is not there, start a new request and reschedule refresh alarm
+//                 console.log("Refresh alarm doesn't exist, starting a new one");
+//                 // startRequest();
+//                 // scheduleRequest();
+//             }
+//         });
+//     } else {
+//         // if refresh alarm triggered, start a new request
+//         startRequest();
+//     }
+// });
 
 // schedule a new fetch every 30 minutes
 function scheduleRequest() {

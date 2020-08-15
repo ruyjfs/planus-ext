@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import Types from '../../../redux/reducers/types';
@@ -6,12 +6,14 @@ import Types from '../../../redux/reducers/types';
 export default ({ routerLink }: any) => {
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
-    dispatch({
-      type: Types.APP.ADD,
-      payload: { routerLink: routerLink },
-    });
-    console.log('Salvou link ->>', routerLink);
+  useEffect(() => {
+    if (routerLink) {
+      dispatch({
+        type: Types.APP.ADD,
+        payload: { routerLink },
+      });
+    }
+    // console.log('Salvou link ->>', routerLink);
   }, []);
 
   return <></>;

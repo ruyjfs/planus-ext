@@ -62,7 +62,7 @@ const orm = (model: any, interfaceModel: any = null) => {
     getAll: async (where: any = null, page = 0, whereArray = null) => {
       let query = model,
         result = {};
-      // query = autoQuery(query, where);
+      query = autoQuery(query, where);
 
       console.log(where, 'PP');
       if (whereArray) {

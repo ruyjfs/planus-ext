@@ -9,12 +9,12 @@ export default () => {
   const byId = useSelector((state: any) => state.tasks?.byId);
   const dispatch = useDispatch();
 
-  function onEdit(id: string) {
-    dispatch({
-      type: Types.TASKS.DEL,
-      id,
-    });
-  }
+  // function onEdit(id: string) {
+  //   dispatch({
+  //     type: Types.TASKS.DEL,
+  //     id,
+  //   });
+  // }
 
   function onDelete(id: string) {
     dispatch({

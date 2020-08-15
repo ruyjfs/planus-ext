@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
-import clsx from 'clsx';
+import React from 'react';
+// import clsx from 'clsx';
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 
 import styled from 'styled-components';
 
-import { blue, orange } from '@material-ui/core/colors';
-import { Fade } from '@material-ui/core';
+import { blue } from '@material-ui/core/colors';
+// import { Fade } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
-import Icon from '@material-ui/core/Icon';
+// import Icon from '@material-ui/core/Icon';
 
 import AppSnackbar from '../app/AppSnackbar';
 import AppContainer from '../../modules/shared/components/AppContainer';
 
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 // import Auth from '../../services/firebase/Auth';
 
 const drawerWidth = 240;

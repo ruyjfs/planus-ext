@@ -8,7 +8,7 @@ import tasks from './tasks';
 import focus from './focus';
 import app from './app';
 
-export default combineReducers({
+const reducers: any = {
   notifications,
   user,
   users,
@@ -17,4 +17,6 @@ export default combineReducers({
   app,
   tasks,
   focus,
-});
+};
+
+export default combineReducers(reducers);

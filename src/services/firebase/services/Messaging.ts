@@ -17,6 +17,7 @@ export default class Messaging {
         data: {
           title: title,
           body: message,
+          sound: 'default',
         },
         notification: {
           title: title,

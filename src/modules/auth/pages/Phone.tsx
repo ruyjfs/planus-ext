@@ -56,7 +56,7 @@ function TextMaskCustom(props: any) {
 
 export default ({ history }: any) => {
   const dispatch = useDispatch();
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
   const classes = useStyles();
 
   const [form, setForm] = useState({

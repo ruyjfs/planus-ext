@@ -26,7 +26,7 @@ const LinkBehavior = React.forwardRef<any, Omit<RouterLinkProps, 'to'>>(
 export default () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
   const settings = useSelector((state: any) => state.app.settings);
   const [form, setForm] = React.useState({
     timeForDay: '08h45',
@@ -36,6 +36,7 @@ export default () => {
   });
 
   React.useEffect(() => {
+    console.log(auth);
     if (settings) {
       setForm({
         timeForDay: settings.timeForDay,
@@ -116,11 +117,11 @@ export default () => {
           />
         </ContainerInput>
         <ContainerButton>
-          {auth.uid ? (
+          {auth.id ? (
             <Button
               variant="outlined"
               color="primary"
-              to="/auth/logout"
+              to="/auth-chat/logout"
               component={RouterLink}
             >
               Sair

@@ -8,7 +8,7 @@ import {
   Fade,
   IconButton,
 } from '@material-ui/core';
-import Mail from '@material-ui/icons/Mail';
+// import Mail from '@material-ui/icons/Mail';
 import { makeStyles } from '@material-ui/core/styles';
 import Icon from '@material-ui/core/Icon';
 import Visibility from '@material-ui/icons/Visibility';
@@ -22,7 +22,7 @@ import Users from '../../../services/firebase/Users';
 
 export default ({ history }: any) => {
   const dispatch = useDispatch();
-  const auth = useSelector((state: any) => state.auth.data);
+  const auth = useSelector((state: any) => state.auth);
   const classes = useStyles();
 
   const [form, setForm] = useState({ password: '' });

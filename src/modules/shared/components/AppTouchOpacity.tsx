@@ -16,7 +16,7 @@ export default ({ children, onPress = () => {} }: any) => {
 
   return (
     <Container
-      style={{ opacity: touched ? '0.3' : '1' }}
+      style={{ opacity: touched ? '0.3' : '1', display: 'inline' }}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onClick={onPress}
