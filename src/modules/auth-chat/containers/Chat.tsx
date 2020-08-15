@@ -161,6 +161,7 @@ export default () => {
       await addMessage(text, true);
       setValue('');
       bot.setResponse(bot.current.id, text);
+      addMessage(bot.getReply().replace('::value::', value));
 
       const signup = await Auth.signup(
         bot.responses.email,
